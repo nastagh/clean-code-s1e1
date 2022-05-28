@@ -18,6 +18,7 @@ var completedTasksHolder=document.getElementById("completed-tasks");//completed-
 var createNewTaskElement=function(taskString){
 
     var listItem=document.createElement("li");
+    listItem.className="list-item list-item-style";
 
     //input (checkbox)
     var checkBox=document.createElement("input");//checkbx
@@ -27,25 +28,26 @@ var createNewTaskElement=function(taskString){
     var editInput=document.createElement("input");//text
     //button.edit
     var editButton=document.createElement("button");//edit button
-
     //button.delete
     var deleteButton=document.createElement("button");//delete button
     var deleteButtonImg=document.createElement("img");//delete button image
-
+    
     label.innerText=taskString;
-    label.className="task";
-
+    label.className="task task-name-style";
+    
     //Each elements, needs appending
     checkBox.type="checkbox";
+    checkBox.className="outline align-checkbox";
     editInput.type="text";
-    editInput.className="task";
-
+    editInput.className="task outline text-input-style visibility";
+    
     editButton.innerText="Edit"; //innerText encodes special characters, HTML does not.
-    editButton.className="edit";
-
-    deleteButton.className="delete";
+    editButton.className="edit outline button-style";
+    
+    deleteButton.className="delete outline button-style";
     deleteButtonImg.src="./remove.svg";
     deleteButtonImg.setAttribute("alt", "remove");
+    deleteButtonImg.className="delete-img";
     deleteButton.appendChild(deleteButtonImg);
 
 
@@ -123,6 +125,8 @@ var taskCompleted=function(){
     //Append the task list item to the #completed-tasks
     var listItem=this.parentNode;
     completedTasksHolder.appendChild(listItem);
+    var label=listItem.querySelector("label");
+    label.classList.toggle("task-comleted_style");
     bindTaskEvents(listItem, taskIncomplete);
 
 }
@@ -134,6 +138,8 @@ var taskIncomplete=function(){
     //When the checkbox is unchecked
     //Append the task list item to the #incomplete-tasks.
     var listItem=this.parentNode;
+    var label=listItem.querySelector("label");
+    label.classList.toggle("task-comleted_style");
     incompleteTaskHolder.appendChild(listItem);
     bindTaskEvents(listItem,taskCompleted);
 }
